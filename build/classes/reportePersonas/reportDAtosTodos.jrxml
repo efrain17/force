@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9952afa6-d213-4274-9590-c1df21e96b8c">
+	<property name="template.type" value="columnar"/>
+	<property name="ireport.zoom" value="1.7715610000000075"/>
+	<property name="ireport.x" value="3"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT *, YEAR(CURDATE())-YEAR(fecNac)  AS EDAD_ACTUAL,
+if(YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac)<=18,'PreJuvenil',
+if(YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac)<=23,'Juvenil',
+if(YEAR(CURDATE())-YEAR(fecNac)>=24 and YEAR(CURDATE())-YEAR(fecNac)<=39,'Senior',
+if(YEAR(CURDATE())-YEAR(fecNac)>=40 and YEAR(CURDATE())-YEAR(fecNac)<=49,'Master 1',
+if(YEAR(CURDATE())-YEAR(fecNac)>=50 and YEAR(CURDATE())-YEAR(fecNac)<=59,'Master 2',
+if(YEAR(CURDATE())-YEAR(fecNac)>=60 and YEAR(CURDATE())-YEAR(fecNac)<=69,'MAster 3',
+if(YEAR(CURDATE())-YEAR(fecNac)>=70 ,'MAster 3',
+'no'))))))) as Categoria_edad,
+
+if(((YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac))<=18)and peso<=53 and sexo='masculino','53',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac))<=18)and peso<=43 and sexo='femenino','43',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac))<=23)and peso<=53 and sexo='masculino','53',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac))<=23)and peso<=43 and sexo='femenino','43',
+if(peso<=59 and sexo='masculino','59',
+if(peso<=47 and sexo='femenino','47',
+if(peso<=66 and sexo='masculino','66',
+if(peso<=52 and sexo='femenino','52',
+if(peso<=74 and sexo='masculino','74',
+if(peso<=57 and sexo='femenino','57',
+if(peso<=83 and sexo='masculino','83',
+if(peso<=63 and sexo='femenino','63',
+if(peso<=93 and sexo='masculino','93',
+if(peso<=72 and sexo='femenino','72',
+if(peso<=105 and sexo='masculino','105',
+if(peso<=84 and sexo='femenino','84',
+if(peso<=120 and sexo='masculino','120',
+if(peso > 84 and sexo='femenino','84+',
+if(peso > 120 and sexo='masculino','+120',
+'no2'))))))))))))))))))) as categoria_peso
+FROM federado
+order by sexo,EDAD_ACTUAL,categoria_peso]]>
+	</queryString>
+	<field name="idfederado" class="java.lang.Long"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="fecNac" class="java.lang.String"/>
+	<field name="fecInic" class="java.lang.String"/>
+	<field name="foto" class="java.io.InputStream"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="EDAD_ACTUAL" class="java.lang.Long"/>
+	<field name="Categoria_edad" class="java.lang.String"/>
+	<field name="categoria_peso" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="f2b5e4fc-506f-4083-9aa1-031e35c90ad2" mode="Opaque" x="0" y="0" width="555" height="29" forecolor="#990000" backcolor="#990000"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="dcd6fdd9-47a1-4594-a58e-c7103ced2e1e" style="Title" x="201" y="0" width="137" height="29"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deportistas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f16f824-3db6-46a2-ba52-4aae39a85ff8" style="SubTitle" x="336" y="8" width="217" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Datos personales]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="7cc50310-2adc-4bc4-b3b9-b7109ed8232e" x="2" y="29" width="551" height="1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="239" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="793ed2ea-01f2-4714-9729-d89edd242b90" x="18" y="157" width="121" height="42"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="e69ff110-3509-4899-9c45-3ad011dd1a79" positionType="FixRelativeToBottom" x="2" y="236" width="551" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="6da93049-f7d1-4855-840c-165f0ac50d9f" style="Detail" positionType="Float" x="290" y="0" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idfederado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="90aa3b11-5bc2-4640-b76c-2cfa0835d06a" style="Column header" positionType="Float" x="158" y="20" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="2adcb3e7-3d65-44b2-aa1e-10fd85ebb51e" style="Detail" positionType="Float" x="290" y="20" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8712a999-1da4-46c6-b904-d8e5ef0fde58" style="Column header" positionType="Float" x="158" y="40" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="145c8733-43e4-4f42-b814-b178781609da" style="Detail" positionType="Float" x="290" y="40" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0684d8ff-740c-488a-b001-621d12e50d36" style="Column header" positionType="Float" x="158" y="60" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="80fbc91a-bc1a-43bf-a98a-864c168f3180" style="Detail" positionType="Float" x="290" y="60" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="efb87a7d-a1af-4836-803c-c13ca9b9e334" style="Column header" positionType="Float" x="158" y="80" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMAIL:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="244c1583-6e9a-49f9-8f46-d7316d34c266" style="Detail" positionType="Float" x="290" y="80" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9ad3d952-c31f-41ea-96ca-5ffb19e11ab6" style="Column header" positionType="Float" x="158" y="100" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="bfc4f5c8-6c91-4827-ae70-feef8a05c154" style="Detail" positionType="Float" x="290" y="100" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="155ae316-c60a-4482-9af4-8e41961f1f73" style="Column header" positionType="Float" x="158" y="120" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a97d8ef6-fbee-470f-8660-f2d5832db4ec" style="Detail" positionType="Float" x="290" y="120" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f04db5b2-0e1a-4b2c-90d5-681868a12488" style="Column header" positionType="Float" x="158" y="140" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECH. NACIMIENTO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="67bbc1aa-0b8e-4093-a8c7-059efc629717" style="Detail" positionType="Float" x="290" y="140" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecNac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a0e48cec-34c7-48b9-abac-3a415d803c51" style="Column header" positionType="Float" x="158" y="160" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECH. INICIO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="4353c40b-5915-43bf-9000-ec6c2e1cd6e1" style="Detail" positionType="Float" x="290" y="160" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecInic}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bdb2bcf1-589a-48a5-b137-a002dbad6bd0" style="Column header" positionType="Float" x="158" y="180" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROVINCIA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="3d203dd9-882e-492e-9451-0dfc147360b0" style="Detail" positionType="Float" x="290" y="180" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="26d8506a-107d-45be-8af1-89990b0084fe" style="Column header" positionType="Float" x="18" y="160" width="41" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="e00738a0-bc09-4c80-94ae-059dc2bb6626" style="Detail" positionType="Float" x="59" y="159" width="80" height="19"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7c622b5d-1efa-4118-96b2-4ad464ff86fb" style="Column header" positionType="Float" x="18" y="178" width="41" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="caf14dab-ccf5-40e9-83de-c3b14709d67a" style="Detail" positionType="Float" x="59" y="177" width="80" height="19"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EDAD_ACTUAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="bc85a15e-b762-46d0-b19e-b5ff25854357" style="Detail" positionType="Float" x="290" y="199" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Categoria_edad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="0de911a0-10f4-434f-884a-cbe8b9431063" style="Detail" positionType="Float" x="290" y="219" width="263" height="17"/>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria_peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="16a74767-dcba-4e4b-a2a7-a66c476114f3" style="Column header" positionType="Float" x="158" y="0" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c622b5d-1efa-4118-96b2-4ad464ff86fb" style="Column header" positionType="Float" x="158" y="197" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAT. EDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c622b5d-1efa-4118-96b2-4ad464ff86fb" style="Column header" positionType="Float" x="158" y="216" width="132" height="19" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAT. PESO:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="68ebf5f5-b0da-4e02-9054-84cd29a37f15" x="18" y="17" width="121" height="120" backcolor="#FFFFFF"/>
+			</rectangle>
+			<image>
+				<reportElement uuid="64ebae4b-9a11-41d6-b6df-46aaf3c693db" x="28" y="29" width="106" height="100"/>
+				<imageExpression><![CDATA[$F{foto}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement uuid="671672bd-8cf5-4650-acd0-572e285a2e61" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement uuid="99ddd809-6c27-4d04-a9d9-16beae6cb6fa" mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#9DB1B8"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="20e4d17b-0c89-4c2b-ac55-4da461d8e2c0" style="Column header" x="513" y="-1" width="40" height="13" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="a2142a10-b043-46e0-aea6-a560449552b9" style="Column header" x="433" y="-1" width="80" height="13" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="10dda174-85f6-4a2f-92e3-05029a60bc88" style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

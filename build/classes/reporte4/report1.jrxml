@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b205c09a-2074-4367-b0d3-554334973e80">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT peso, mcm, (peso*(igc/(100)))
+ FROM cuerpo
+where idfederado=$P{parameter1} and fecha=(SELECT max(fecha)
+ FROM cuerpo
+where idfederado=$P{parameter1})]]>
+	</queryString>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="mcm" class="java.lang.Double"/>
+	<field name="(peso*(igc/(100)))" class="java.lang.Double"/>
+	<title>
+		<band height="188" splitType="Stretch">
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement uuid="840121b2-c564-4d31-992b-ffc64143c4d7" x="-20" y="-22" width="308" height="165"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Peso corporal"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{peso}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{peso}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Masa magra"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{mcm}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mcm}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Grasa corporal"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{(peso*(igc/(100)))}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{(peso*(igc/(100)))}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</title>
+</jasperReport>

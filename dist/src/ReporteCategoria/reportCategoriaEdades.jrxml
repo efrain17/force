@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c4673a9b-c59d-4d44-996c-0d191af9e260">
+	<property name="ireport.zoom" value="0.8264462809917364"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="fecha_1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *, YEAR(CURDATE())-YEAR(fecNac)  AS EDAD_ACTUAL,
+if(YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac)<=18,'PreJuvenil',
+if(YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac)<=23,'Juvenil',
+if(YEAR(CURDATE())-YEAR(fecNac)>=24 and YEAR(CURDATE())-YEAR(fecNac)<=39,'Senior',
+if(YEAR(CURDATE())-YEAR(fecNac)>=40 and YEAR(CURDATE())-YEAR(fecNac)<=49,'Master 1',
+if(YEAR(CURDATE())-YEAR(fecNac)>=50 and YEAR(CURDATE())-YEAR(fecNac)<=59,'Master 2',
+if(YEAR(CURDATE())-YEAR(fecNac)>=60 and YEAR(CURDATE())-YEAR(fecNac)<=69,'MAster 3',
+if(YEAR(CURDATE())-YEAR(fecNac)>=70 ,'MAster 3',
+'no'))))))) as Categoria_edad,
+
+if(((YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac))<=18)and peso<=53 and sexo='masculino','53',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=14 and YEAR(CURDATE())-YEAR(fecNac))<=18)and peso<=43 and sexo='femenino','43',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac))<=23)and peso<=53 and sexo='masculino','53',
+if(((YEAR(CURDATE())-YEAR(fecNac)>=19 and YEAR(CURDATE())-YEAR(fecNac))<=23)and peso<=43 and sexo='femenino','43',
+if(peso<=59 and sexo='masculino','59',
+if(peso<=47 and sexo='femenino','47',
+if(peso<=66 and sexo='masculino','66',
+if(peso<=52 and sexo='femenino','52',
+if(peso<=74 and sexo='masculino','74',
+if(peso<=57 and sexo='femenino','57',
+if(peso<=83 and sexo='masculino','83',
+if(peso<=63 and sexo='femenino','63',
+if(peso<=93 and sexo='masculino','93',
+if(peso<=72 and sexo='femenino','72',
+if(peso<=105 and sexo='masculino','105',
+if(peso<=84 and sexo='femenino','84',
+if(peso<=120 and sexo='masculino','120',
+if(peso > 84 and sexo='femenino','84+',
+if(peso > 120 and sexo='masculino','+120',
+'no2'))))))))))))))))))) as categoria_peso
+FROM federado
+where YEAR(CURDATE())-YEAR(fecNac)>=$P{fecha_1} and YEAR(CURDATE())-YEAR(fecNac)<=$P{fecha_2}
+order by sexo,EDAD_ACTUAL,categoria_peso]]>
+	</queryString>
+	<field name="idfederado" class="java.lang.Long"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="fecNac" class="java.lang.String"/>
+	<field name="fecInic" class="java.lang.String"/>
+	<field name="foto" class="java.lang.Object"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="EDAD_ACTUAL" class="java.lang.Long"/>
+	<field name="Categoria_edad" class="java.lang.String"/>
+	<field name="categoria_peso" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<frame>
+				<reportElement uuid="80915a4c-e3c2-4f41-9651-cd1523a52ba7" mode="Opaque" x="0" y="0" width="802" height="66" backcolor="#000000"/>
+				<staticText>
+					<reportElement uuid="f36a52ea-4a3f-457f-82e4-53b55a3bb856" style="Title" x="0" y="0" width="370" height="66"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Deportistas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4ab8dcdd-cfea-46bd-95de-7a3decc665f1" style="SubTitle" x="441" y="37" width="356" height="29"/>
+					<textElement textAlignment="Right">
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Deportistas clasificados por categoría]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="1b67a18d-de50-4fac-8aaa-2c54b74b6c81" mode="Opaque" x="0" y="66" width="802" height="32" forecolor="#000000" backcolor="#CC0000"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="5b3fe243-47e0-4fb7-88db-60a74b385792" x="653" y="12" width="144" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="bf686b4d-fa4c-486a-a791-1fc32db22162" style="Column header" mode="Opaque" x="0" y="0" width="71" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb55f144-6ced-4142-b9b3-dd01453b3b65" style="Column header" mode="Opaque" x="71" y="0" width="169" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8695452e-8986-499b-906e-94092647be97" style="Column header" mode="Opaque" x="240" y="0" width="166" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="52052a37-cc88-482e-9bad-190e1be653da" style="Column header" mode="Opaque" x="406" y="0" width="58" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e55565f-5760-4a70-9869-fec95e5f2852" style="Column header" mode="Opaque" x="464" y="0" width="79" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FEC. NAC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5038a03e-f2b2-4c79-9b38-a32ed08bc0e6" style="Column header" mode="Opaque" x="543" y="0" width="53" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a0361ade-26c9-4685-91c0-2630d9d71950" style="Column header" mode="Opaque" x="596" y="0" width="43" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="357a340e-c227-4071-bc03-601a0e29d9d6" style="Column header" mode="Opaque" x="639" y="0" width="79" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAT. EDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="66b36617-9024-41c2-a67b-d20519620379" style="Column header" mode="Opaque" x="718" y="0" width="79" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAT. PESO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement uuid="26f5cc94-7020-44f0-84d7-ec6492bc9d69" style="Row" mode="Opaque" x="0" y="0" width="797" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5f5fdefc-0f7e-440d-a4c8-7aaab7497d01" style="Detail" positionType="Float" x="0" y="0" width="71" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idfederado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2b42d496-48f4-418a-b4fe-208698a5f151" style="Detail" positionType="Float" x="71" y="0" width="169" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="8c79c148-c720-40d4-a9ac-56346c355375" style="Detail" positionType="Float" x="240" y="0" width="166" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="6ef175f8-8781-41e3-8d25-ee204d97d891" style="Detail" positionType="Float" x="406" y="0" width="58" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="6ecf1ded-5f3c-48e3-a249-5eea8ca22421" style="Detail" positionType="Float" x="464" y="0" width="79" height="18"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fecNac}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="35590802-a158-4e57-9743-c797ae9983d7" style="Detail" positionType="Float" x="543" y="0" width="53" height="18"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="8bf382dd-eb9b-49f2-a962-e3c792c05581" style="Detail" positionType="Float" x="596" y="0" width="43" height="18"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDAD_ACTUAL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="93ff2586-07f3-43c8-b076-687d6f91c476" style="Detail" positionType="Float" x="639" y="0" width="79" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Categoria_edad}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="bea7528b-9943-4e25-9d80-dafb433f4048" style="Detail" positionType="Float" x="718" y="0" width="79" height="18"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{categoria_peso}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement uuid="af715ae6-7cea-41df-8bbd-2ce755754f3f" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="eb287e06-df70-4082-a13c-3ef53a6ad77a" mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="115ecb1d-e31a-46e0-bd2c-a325b7c2b235" style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f931a21d-c86e-4c60-b616-3aae2b8fd95f" style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="8a3cef47-7cbb-4e7e-a8f8-2c24b25e579d" style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

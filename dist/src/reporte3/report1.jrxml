@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6de3af70-ec74-4545-a89d-342bd400318d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.Double"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT peso, mcm, (peso*(igc/(100)))
+ FROM cuerpo]]>
+	</queryString>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="mcm" class="java.lang.Double"/>
+	<field name="(peso*(igc/(100)))" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="308" splitType="Stretch">
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement uuid="e51418d2-1faa-4c55-b523-3ff732deaf94" x="18" y="17" width="271" height="160"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Peso Corporal KG"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{peso}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{peso}]]></valueExpression>
+						<labelExpression><![CDATA["Peso"]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Masa corporal magra KG"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{mcm}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mcm}]]></valueExpression>
+						<labelExpression><![CDATA["MCM"]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Grasa corporal kg"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{(peso*(igc/(100)))}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{(peso*(igc/(100)))}]]></valueExpression>
+						<labelExpression><![CDATA["GC"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement uuid="742f7aad-f8aa-4e6d-a0cc-6155dd691e01" x="289" y="177" width="247" height="131"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{mcm}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mcm}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
